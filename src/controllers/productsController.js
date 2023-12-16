@@ -31,11 +31,14 @@ const controller = {
 
 	// Update - Form to edit
 	edit: (req, res) => {
-		// Do the magic
+		const {id}=req.params;
+		const productToEdit = products.find(product => product.id == id)
+		res.render("product-edit-form", {productToEdit})
+		
 	},
 	// Update - Method to update
 	update: (req, res) => {
-		// Do the magic
+		res.send("Producto Guardado!")
 	},
 
 	// Delete - Delete one product from DB
