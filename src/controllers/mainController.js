@@ -1,18 +1,22 @@
 const fs = require('fs');
 const path = require('path');
 
-const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
-const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+// const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
+// const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+const {readFile, saveFile} = require('/..data/dbLogica');
+
 const controller = {
 	index: (req, res) => {
+		let products = readFile('products');
 		const visited= products.filter(product=> product.category =="visited");
 		const inSale= products.filter(product=> product.category =="in-sale");
 		res.render("index", {visited, inSale, toThousand});
 	},
 	search: (req, res) => {
+		let products = readFile('products');
 		let userSearch = req.query.keywords
 		let productsResults =[];
 
@@ -22,7 +26,8 @@ const controller = {
 			}
 		}
 		
-		res.render("results", {productsResults, toThousand})
+		res.render("results", {productsResults,userSearch, toThousand})
+		//console.log(productsResults);
 	},
 };
 
