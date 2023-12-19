@@ -1,12 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
-// const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
-// const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+//  const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
+//  const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-const {readFile, saveFile} = require('/..data/dbLogica');
+const {readFile, saveFile} = require('../data/dbLogica');
 
 const controller = {
 	index: (req, res) => {
@@ -21,7 +21,7 @@ const controller = {
 		let productsResults =[];
 
 		for (let i=0; i < products.length; i++ ){
-			if(products[i].name.includes(userSearch)){
+			if(products[i].name.toUpperCase().includes(userSearch.toUpperCase())){
 				productsResults.push(products[i])
 			}
 		}

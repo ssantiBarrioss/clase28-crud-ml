@@ -16,12 +16,12 @@
 		<div class="row">
 	
 <% const searchTerm = userSearch.trim().toLowerCase(); %>
-
+<div class="col-12">
+	<h2 class="products-title">Resultados de la búsqueda: <%= searchTerm%></h2>
+</div>
 <% if (productsResults.some(producto => producto.name.toLowerCase().includes(searchTerm))) { %>
 				<% productsResults.forEach(producto=>{ %>
-					<div class="col-12">
-						<h2 class="products-title">Resultados de la búsqueda: <%= producto.name %></h2>
-					</div>
+					
 						<div class="col-12 col-sm-6 col-lg-3">
 							<section class="product-box">
 								<a href="/products/detail/<%= producto.id %>">
