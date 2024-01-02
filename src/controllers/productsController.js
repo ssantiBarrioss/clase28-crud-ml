@@ -27,10 +27,25 @@ const controller = {
 	
 	// Create -  Method to store
 	store: (req, res) => {
-		const producto=req.body;
 		let products= readFile('products');
-		producto.id = products[products.length-1].id+1;
-		products.push(producto);
+		// const product=req.body;
+		const {name, price, discount, category, description} = req.body;
+		const files = req.files;
+		id = products[products.length-1].id+1;
+		const arrayImages=[];
+		files.forEach(element => {
+		 arrayImages.push(element.filename);
+		});
+		const newProduct = {
+			id: +id,
+			name: name.trim(),
+			price: +price,
+			discount: +discount,
+			category: category.trim(),
+			description: description.trim(),
+			image: arrayImages.length > 0 ? arrayImages : ["default-image.jpg"]
+		}
+		products.push(newProduct);
 		saveFile(products, 'products')
 		res.redirect('/products')
 	},
@@ -45,6 +60,12 @@ const controller = {
 	},
 	// Update - Method to update
 	update: (req, res) => {
+		const images = [];
+      if(req.files){
+        req.files.forEach(element=>{
+          images.push(element.filename)
+        })
+      };
 		let products= readFile('products');
 		const {id}=req.params;
 		const {name,price,discount,category,description,image}=req.body;
@@ -57,7 +78,7 @@ const controller = {
 					discount,
 					category,
 					description: description.trim(),
-					image: image ? image : product.image
+					image: images.length > 0 ? images : product.image
 				}	
 			}
 			return product
