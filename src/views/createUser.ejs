@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('partials/head', {title: 'Formulario de creación'}) %>
+<body>
+	<!-- Header -->
+	<%- include('partials/headerNavbar') %>
+	<!-- /Header -->
+
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Formulario de creación de productos</h2>
+			</div>
+		</div>
+		<div class="col-12">
+			<form action="/users/registerUser" method="POST">
+				<div class="row product-detail">
+					<div class="col-12 col-md-6">
+						<label for="first_name" class="form-label">Nombre:</label>
+						<input type="text" id="first_name" name="first_name" value="<%= locals.old && old.first_name %>" placeholder="Ej: Juan" class="form-input">
+						<% if (locals.errors && errors.first_name) { %>
+							<p class="feedback" style="color: red;"><%= errors.first_name.msg %></p>
+							<% } %>
+					</div>
+                    <div class="col-12 col-md-6">
+						<label for="last_name" class="form-label">Apellido:</label>
+						<input type="text" id="last_name" name="last_name" value="<%= locals.old && old.last_name %>" placeholder="Ej: Pérez" class="form-input">
+						<% if (locals.errors && errors.last_name) { %>
+							<p class="feedback" style="color: red;"><%= errors.last_name.msg %></p>
+							<% } %>
+					</div>
+					<div class="col-12 col-md-6">
+						<label for="email" class="form-label">Correo electrónico:</label>
+						<input type="text" id="email" name="email" value="<%= locals.old && old.password %>" placeholder="Ej: usuario@hotmail.com" class="form-input">
+						<% if (locals.errors && errors.email) { %>
+							<p class="feedback" style="color: red;"><%= errors.email.msg %></p>
+							<% } %>
+					</div>
+					<div class="col-12 col-md-6">
+						<label for="password" class="form-label">Contraseña:</label>
+						<input type="password" id="password" name="password" value="<%= locals.old && old.password %>" class="form-input">
+						<% if (locals.errors && errors.password) { %>
+							<p class="feedback" style="color: red;"><%= errors.password.msg %></p>
+							<% } %>
+					</div>
+					<div class="col-12">
+						<button type="submit" class="buy-now-button">Crear Usuario</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</div>
+	<!-- /todos los productos -->
+
+	<!-- footer -->
+	<%- include('partials/footer') %>
+	<!-- /footer -->
+</body>	
+</html>
